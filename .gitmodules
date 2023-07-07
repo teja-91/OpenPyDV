@@ -1,0 +1,3 @@
+[submodule "uvm-python"]
+	path = uvm-python
+	url = git@github.com:tpoikela/uvm-python.git
