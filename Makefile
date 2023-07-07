@@ -14,12 +14,9 @@ TOPLEVEL_LANG ?= verilog
 SIM ?= xcelium
 
 PWD=$(shell pwd)
-
-WPWD=$(shell pwd)
-UVM_PYTHON := $(PROJ_ROOT)/uvm-python/src/uvm
-# PYTHONPATH := $(WPWD)/model:$(PYTHONPATH):.:../../../integrated
-PYTHONPATH := $(UVM_PYTHON):$(PYTHONPATH)
-# PYTHONPATH := $(WPWD)/../../../..:$(PYTHONPATH)
+# add UVM path and test path
+PYTHONPATH := $(PROJ_ROOT)/dv/test:$(PYTHONPATH)
+PYTHONPATH += $(PROJ_ROOT)/uvm-python/src/uvm::$(PYTHONPATH)
 
 export PYTHONPATH
 
@@ -34,7 +31,10 @@ ifneq ($(SIMARGS),)
 endif
 
 TOPLEVEL := i2c
-MODULE   ?= test_uvm_events
+MODULE   ?= base_test
+
+print_path: 
+	echo $(PYTHONPATH)
 
 # Will be passed to compilation
 #EXTRA_ARGS=""
