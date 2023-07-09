@@ -32,6 +32,13 @@ ifneq ($(SIMARGS),)
     PLUSARGS += $(SIMARGS)
 endif
 
+ifeq ($(SIM),verilator)
+  EXTRA_ARGS += -Wno-fatal
+ifeq ($(WAVES), 1)
+  EXTRA_ARGS += --trace --trace-structs
+endif
+endif
+
 TOPLEVEL := i2c
 MODULE   ?= base_test
 
